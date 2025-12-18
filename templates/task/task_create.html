@@ -1,0 +1,18 @@
+{% extends "../base.html" %}
+{% block title %}
+  <title>Create Task</title>
+{% endblock title %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div>
+      {% for field in form %}
+        <div>
+          {{ field.label_tag }}
+          <div>{{ field }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    <input class="btn btn-success" type="submit" value="Зберегти">
+  </form>
+{% endblock content %}
