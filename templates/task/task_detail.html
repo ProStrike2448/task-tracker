@@ -13,7 +13,7 @@
       Пріоритет: <span class="badge badge-secondary">{{ object.priority }}</span>
     </p>
     <p>Дедлайн: {{ object.due_to|date }}</p>
-    <a href="" class="btn btn-warning">Редагувати</a>
-    <a href="" class="btn btn-danger">Видалити</a>
+    <a href="{% url 'task_update' object.pk %}" class="btn btn-warning">Редагувати</a>  {% comment "" %}{% endcomment %}
+    <a href="{% url 'task_delete' object.pk %}" class="btn btn-danger">Видалити</a> {% comment "" %}{% endcomment %}
   </div>
 {% endblock content %}
