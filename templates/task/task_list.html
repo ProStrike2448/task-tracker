@@ -6,12 +6,30 @@
   <div class="container mt-3">
     <h1>Список завдань</h1>
     <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">Додати завдання</a>
+    <br>
+    <form method="get" class="row row-cols-lg-auto g-3 align-items-center mb-3">
+      <div class="fieldWrapper row col-12">
+        <label for="{{ form.status.id_for_label }}" class="col-sm-4 col-form-label">Статус:</label>
+        <div class="col-sm-8">{{ form.status }}</div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary mb-2">Фільтрувати</button>
+      </div>
+    </form>
     <ul class="list-group">
       {% for task in object_list %}
-        <li class="list-group-item">
-          <a href="{% url "task_detail" task.pk %}">{{ task.title }}</a>
-          <span class="badge badge-primary">{{ task.status }}</span>
-          <span class="badge badge-secondary">{{ task.priority }}</span>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <a href="{% url "task_detail" task.pk %}">{{ task.title }}</a>
+            <span class="badge text-bg-primary">{{ task.status }}</span>
+            <span class="badge text-bg-secondary">{{ task.priority }}</span>
+          </div>
+          <div>
+            <form action="{% url 'task_complete' task.pk %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning btn-sm">Позначити як виконане</button>
+            </form>
+          </div>
         </li>
       {% empty %}
         <li class="list-group-item">Завдань не знайдено.</li>
