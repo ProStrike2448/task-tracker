@@ -1,6 +1,6 @@
-from django.forms import ChoiceField, DateTimeInput, Form, ModelForm, Select
+from django.forms import ChoiceField, DateTimeInput, FileInput, Form, ModelForm, Select
 
-from .models import Task
+from .models import Comment, Task
 
 
 class CreateTaskForm(ModelForm):
@@ -29,3 +29,10 @@ class TaskFilterForm(Form):
         widget=Select(attrs={"class": "form-select"}),
         label="Статус",
     )
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content", "media"]
+        widgets = {"media": FileInput()}
